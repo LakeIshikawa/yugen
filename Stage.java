@@ -2,6 +2,7 @@ package yugen;
 
 import com.badlogic.gdx.ai.fsm.State;
 import com.badlogic.gdx.ai.msg.Telegram;
+import com.badlogic.gdx.math.Rectangle;
 import com.lksoft.yugen.stateful.Fsm;
 import com.lksoft.yugen.stateless.SceneDef;
 
@@ -19,6 +20,10 @@ public class Stage extends Fsm<Stage, StageState, Object> {
     // References
     Fsm p1, p2;
     SceneDef scene;
+
+    // Fighters collision
+    Rectangle p1Rect = new Rectangle();
+    Rectangle p2Rect = new Rectangle();
 
     @Override
     public StageState getInitialState(){
@@ -78,6 +83,33 @@ enum StageState implements State<Stage> {
             int px = (int)(stage.p1.pos.x + stage.p2.pos.x)/2;
             px = Math.min(Math.max(px, minx), maxx);
             stage.setCamera(px, stage.scene.camera_y);
+
+            // Fighters physical collision
+            int collWidth = (int) (stage.fighters_height * 0.6f);
+            Rectangle r1 = stage.p1Rect;
+            Rectangle r2 = stage.p2Rect;
+            r1.set(stage.p1.pos.x - collWidth/2, stage.p1.pos.y, collWidth/2, collWidth);
+            r2.set(stage.p2.pos.x - collWidth/2, stage.p2.pos.y, collWidth/2, collWidth);
+
+            if( stage.p1Rect.overlaps(stage.p2Rect) ){
+                float overlapWidth = r1.x < r2.x ? r1.width - (r2.x - r1.x) : r2.width - (r1.x - r2.x);
+                float step = 4 + overlapWidth/2;
+
+                float f1Step;
+                float f2Step;
+
+                // Push back!
+                if( r1.x < r2.x ){
+                    f1Step = -step/2;
+                    f2Step = step/2;
+                } else {
+                    f1Step = step/2;
+                    f2Step = -step/2;
+                }
+
+                stage.p1.pos.x += f1Step;
+                stage.p2.pos.x += f2Step;
+            }
         }
     };
 

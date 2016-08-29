@@ -209,13 +209,13 @@ public class Fighter extends Fsm<Fighter, State<Fighter>, FighterHit> {
         }
 
         // Stage borders
-        float leftBorder = stage.getCameraPos().x - stage.scene.camera_width/2;
-        float rightBorder = stage.getCameraPos().x + stage.scene.camera_width/2;
-        if( pos.x <= leftBorder && vel.x < 0 ){
+        float leftBorder = 30 + stage.getCameraPos().x - stage.scene.camera_width/2;
+        float rightBorder = stage.getCameraPos().x + stage.scene.camera_width/2 - 30;
+        if( (pos.x == leftBorder && vel.x < 0) || (pos.x < leftBorder) ){
             vel.x = 0;
             pos.x = leftBorder;
         }
-        if( pos.x >= rightBorder && vel.x > 0 ){
+        if( (pos.x == rightBorder && vel.x > 0) || (pos.x > rightBorder) ){
             vel.x = 0;
             pos.x = rightBorder;
         }
