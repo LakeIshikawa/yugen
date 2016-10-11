@@ -2,7 +2,7 @@ package yugen.screens;
 
 import com.badlogic.gdx.ai.fsm.State;
 import com.badlogic.gdx.ai.msg.Telegram;
-import com.lksoft.yugen.stateful.Fsm;
+import com.lksoft.sweat.stateful.Fsm;
 
 
 
@@ -22,8 +22,8 @@ public class StageSelect extends Fsm<StageSelect, StageSelectState, Object> {
 enum StageSelectState implements State<StageSelect>{
     INIT(){
         public void enter(StageSelect fsm){
-            fsm.loadFSM("chars/valkyrie/Valkyrie.java", "p1");
-            fsm.loadFSM("chars/valkyrie/Valkyrie.java", "p2");
+            fsm.loadFSM("chars/ryu/Ryu.java", "p1");
+            fsm.loadFSM("chars/ryu/Ryu.java", "p2");
             fsm.loadFSM("stages/lionking/Lionking.java", "stage");
 
             fsm.destroyFSM(fsm.getName());

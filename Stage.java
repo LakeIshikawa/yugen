@@ -3,8 +3,8 @@ package yugen;
 import com.badlogic.gdx.ai.fsm.State;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.math.Rectangle;
-import com.lksoft.yugen.stateful.Fsm;
-import com.lksoft.yugen.stateless.SceneDef;
+import com.lksoft.sweat.stateful.Fsm;
+import com.lksoft.sweat.stateless.SceneDef;
 
 /**
  * Fighter base class

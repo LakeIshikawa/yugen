@@ -2,7 +2,7 @@ package yugen;
 
 import com.badlogic.gdx.ai.fsm.State;
 import com.badlogic.gdx.ai.msg.Telegram;
-import com.lksoft.yugen.stateful.NonFsm;
+import com.lksoft.sweat.stateful.NonFsm;
 
 /**
  * 1-time effect
